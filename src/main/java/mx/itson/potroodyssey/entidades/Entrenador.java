@@ -9,6 +9,10 @@ package mx.itson.potroodyssey.entidades;
  * @author user
  */
 public class Entrenador {
+    
+    private int id;
+    private String nombre;
+    private String apodo;
 
     /**
      * @return the id
@@ -51,16 +55,4 @@ public class Entrenador {
     public void setApodo(String apodo) {
         this.apodo = apodo;
     }
-    private int id;
-    private String nombre;
-    private String apodo;
-
-    public Entrenador(int id, String nombre, String apodo) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apodo = apodo;
-    }
-
-    // Getters y Setters
-    // toString() para depuración
 }
