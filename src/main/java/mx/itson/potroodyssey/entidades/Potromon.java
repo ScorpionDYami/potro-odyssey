@@ -11,6 +11,14 @@ package mx.itson.potroodyssey.entidades;
 import java.util.List;
 
 public class Potromon {
+    
+    private int id;
+    private String nombre;
+    private String descripcion;
+    private String imagen; 
+    private Entrenador entrenador;
+    private List<Habilidad> habilidades;
+    private int puntaje;
 
     /**
      * @return the id
@@ -109,25 +117,6 @@ public class Potromon {
     public void setPuntaje(int puntaje) {
         this.puntaje = puntaje;
     }
-    private int id;
-    private String nombre;
-    private String descripcion;
-    private String imagen; // Ruta de la imagen
-    private Entrenador entrenador;
-    private List<Habilidad> habilidades;
-    private int puntaje;
-
-    public Potromon(int id, String nombre, String descripcion, String imagen, Entrenador entrenador, List<Habilidad> habilidades, int puntaje) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.imagen = imagen;
-        this.entrenador = entrenador;
-        this.habilidades = habilidades;
-        this.puntaje = puntaje;
-    }
-
-    // Getters y Setters
-    // toString() para depuración
+    
 }
 
