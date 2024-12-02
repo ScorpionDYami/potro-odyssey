@@ -9,12 +9,23 @@ package mx.itson.potroodyssey.entidades;
  * @author user
  */
 public class Habilidad {
+    
     private int id;
     private String nombre;
+    private String descripcion;
+    
+    /**
+     * @return the descripcion
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-    public Habilidad(int id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
+    /**
+     * @param descripcion the descripcion to set
+     */
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     // Getters y Setters
@@ -32,14 +43,6 @@ public class Habilidad {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    @Override
-    public String toString() {
-        return "Habilidad{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                '}';
     }
 }
 
