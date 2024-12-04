@@ -63,6 +63,8 @@ public class Entrenador {
     public void setApodo(String apodo) {
         this.apodo = apodo;
     }
+    
+    //Creamos una lista para poder colocar todos los entrenadores y los conectamos junto a la base de datos para invocarlas dentro de esta//
     public static List<Entrenador> getAll(){
         List<Entrenador> entrenadores = new ArrayList<>();
         try {
@@ -82,6 +84,7 @@ public class Entrenador {
         return entrenadores;
     }
     
+    //Invocamos el entrenador desde el ID (identificador) y obtenemos sus parametros en el orden impuesto//
     public static Entrenador getById(int id){
         Entrenador e = new Entrenador();
         try {
@@ -102,6 +105,7 @@ public class Entrenador {
         return e;
     }
     
+     //Guardamos dentro de el array nuestros parametros de Entrenador puestos en esta funcion//
     public static boolean save(String nombre, String apodo){
         boolean resultado = false;
         try{
@@ -119,7 +123,7 @@ public class Entrenador {
         }
         return resultado;
     }
-    
+    //Editamos en el array el parametro anteriormente puesto con esta funcion//
     public static boolean edit(int id, String nombre, String apodo){
         boolean resultado = false;
         try{
@@ -138,7 +142,7 @@ public class Entrenador {
         }
         return resultado;
     }
-    
+    //Eliminamos los parametros mencionados dentro del array list//
     public static boolean delete(int id) {
         boolean resultado = false;
         try {
