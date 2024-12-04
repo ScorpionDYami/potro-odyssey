@@ -168,8 +168,8 @@ public class PotromonForm extends javax.swing.JDialog {
         String nombreEntrenador =  cmbEntrenadores.getSelectedItem().toString();
         List<Entrenador> entrenadores = Entrenador.getAll();
         int idEntrenador = 0;
-        int puntaje = Integer.parseInt(txtPuntaje.getText());
-        Potromon p = new Potromon();
+        int puntaje = Integer.parseInt(txtPuntaje.getText()) + Potromon.getById(id).getPuntaje();
+        
        
         for(int i=0;i<entrenadores.size();i++){
             if(nombreEntrenador.equals(entrenadores.get(i).getNombre())){
@@ -178,9 +178,7 @@ public class PotromonForm extends javax.swing.JDialog {
             }
         }
         
-        if(this.id != 0){
-            puntaje += p.getPuntaje();
-        } 
+       
         
         
         
