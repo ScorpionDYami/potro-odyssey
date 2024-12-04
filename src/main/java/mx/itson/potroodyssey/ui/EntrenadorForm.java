@@ -16,7 +16,18 @@ public class EntrenadorForm extends javax.swing.JDialog {
     int id;
     
     /**
-     * Creates new form EntrenadorForm
+     * Constructor de la clase EntrenadorForm. Inicializa el formulario para
+     * crear o editar un entrenador, cargando los datos del entrenador
+     * correspondiente si se proporciona un ID válido.
+     *
+     * @param parent El frame principal desde el cual se abre el formulario.
+     * Este parámetro se pasa al constructor de la clase base `JDialog` para que
+     * el formulario sea una ventana modal o no, dependiendo de `modal`.
+     * @param modal Indica si el formulario debe ser modal. Si es `true`, la
+     * ventana bloqueará la interacción con otras ventanas hasta que se cierre.
+     * @param id El ID del entrenador a cargar. Si el valor es 0, el formulario
+     * se usará para crear un nuevo entrenador. Si es distinto de 0, el
+     * formulario cargará los datos del entrenador existente con ese ID.
      */
     public EntrenadorForm(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
@@ -109,7 +120,17 @@ public class EntrenadorForm extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Método manejador de eventos para el botón "Aceptar". Este método se
+     * ejecuta cuando el usuario hace clic en el botón "Aceptar" en el
+     * formulario. Dependiendo de si el ID es 0 (nuevo entrenador) o distinto de
+     * 0 (editar entrenador existente), guarda o edita los datos del entrenador
+     * en la base de datos.
+     *
+     * @param evt El evento generado por la acción de hacer clic en el botón
+     * "Aceptar".
+     */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         String nombre = txtNombre.getText();
         String puesto = txtApodo.getText();

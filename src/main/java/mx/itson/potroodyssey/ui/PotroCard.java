@@ -15,7 +15,19 @@ public class PotroCard extends javax.swing.JDialog {
     int id;
     
     /**
-     * Creates new form PotroCard
+     * Constructor de la clase `PotroCard`. Inicializa los componentes de la
+     * interfaz y establece los datos del `potromon` correspondiente al `id`
+     * proporcionado. Si el `id` es distinto de cero, se carga la información
+     * del `potromon` desde la base de datos y se muestra en los controles de la
+     * interfaz.
+     *
+     * @param parent La ventana principal o el formulario padre desde el cual se
+     * abre este formulario.
+     * @param modal Indica si el formulario debe ser modal o no. Si es `true`,
+     * el formulario bloqueará la interacción con el formulario principal hasta
+     * que se cierre.
+     * @param id El ID del `potromon` que se desea mostrar. Si es `0`, se creará
+     * un nuevo `potromon`.
      */
     public PotroCard(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);

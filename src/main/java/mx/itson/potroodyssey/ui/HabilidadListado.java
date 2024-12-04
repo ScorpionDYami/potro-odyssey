@@ -18,7 +18,17 @@ public class HabilidadListado extends javax.swing.JDialog {
     int id;
     
     /**
-     * Creates new form HabilidadListado
+     * Constructor de la clase `HabilidadListado`. Este constructor inicializa
+     * el formulario que lista las habilidades y configura el identificador de
+     * la habilidad que se pasará como parámetro.
+     *
+     * @param parent El cuadro de diálogo o ventana principal que contiene este
+     * formulario.
+     * @param modal Indica si el formulario debe ser modal, lo que significa que
+     * bloquea la interacción con otras ventanas hasta que se cierre.
+     * @param id El identificador de la habilidad. Este valor se utiliza para
+     * identificar la habilidad en el contexto de la lista o para posibles
+     * operaciones adicionales relacionadas con esa habilidad.
      */
     public HabilidadListado(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
@@ -134,6 +144,16 @@ public class HabilidadListado extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método manejador de eventos para el botón "Aprender". Este método se
+     * ejecuta cuando el usuario hace clic en el botón "Aprender" en el
+     * formulario. Abre un formulario para agregar una nueva habilidad para el
+     * `potromon` relacionado con el `id`, y luego recarga la tabla para
+     * reflejar cualquier cambio.
+     *
+     * @param evt El evento generado por la acción de hacer clic en el botón
+     * "Aprender".
+     */
     private void btnAprenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAprenderActionPerformed
         HabilidadForm form = new HabilidadForm(this, true, 0, id);
         form.setVisible(true);
@@ -141,11 +161,29 @@ public class HabilidadListado extends javax.swing.JDialog {
         cargarTabla();
     }//GEN-LAST:event_btnAprenderActionPerformed
 
+    /**
+     * Método manejador de eventos que se ejecuta cuando la ventana del
+     * formulario se ha abierto. Este método carga los datos de las habilidades
+     * en la tabla y elimina la primera columna de la tabla.
+     *
+     * @param evt El evento generado cuando la ventana se abre (accionado por el
+     * sistema cuando la ventana se hace visible).
+     */
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         cargarTabla();
         tblHabilidades.removeColumn(tblHabilidades.getColumnModel().getColumn(0));
     }//GEN-LAST:event_formWindowOpened
-
+    
+    /**
+     * Método manejador de eventos para el botón "Olvidar". Este método se
+     * ejecuta cuando el usuario hace clic en el botón "Olvidar" en el
+     * formulario. Elimina una habilidad previamente asignada a un `potromon`,
+     * muestra un cuadro de confirmación y luego recarga la tabla para reflejar
+     * cualquier cambio.
+     *
+     * @param evt El evento generado por la acción de hacer clic en el botón
+     * "Olvidar".
+     */
     private void btnOlvidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOlvidarActionPerformed
         int renglon = tblHabilidades.getSelectedRow();
         int idHabilidad = Integer.parseInt(tblHabilidades.getModel().getValueAt(renglon, 0).toString());
@@ -160,6 +198,16 @@ public class HabilidadListado extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnOlvidarActionPerformed
 
+    /**
+     * Método manejador de eventos para el botón "Alterar". Este método se
+     * ejecuta cuando el usuario hace clic en el botón "Alterar" en el
+     * formulario. Abre un formulario para editar una habilidad existente
+     * asociada a un `potromon` específico, y luego recarga la tabla para
+     * reflejar cualquier cambio realizado.
+     *
+     * @param evt El evento generado por la acción de hacer clic en el botón
+     * "Alterar".
+     */
     private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         int renglon = tblHabilidades.getSelectedRow();
         int idHabilidad = Integer.parseInt(tblHabilidades.getModel().getValueAt(renglon, 0).toString());
@@ -170,6 +218,12 @@ public class HabilidadListado extends javax.swing.JDialog {
         cargarTabla();
     }//GEN-LAST:event_btnAlterarActionPerformed
 
+    /**
+     * Método para cargar los datos de las habilidades en la tabla
+     * `tblHabilidades`. Este método obtiene una lista de habilidades asociadas
+     * a un `potromon` específico mediante su `id`, y luego llena la tabla con
+     * los datos de esas habilidades.
+     */
     private void cargarTabla(){
         List<Habilidad> habilidades = Habilidad.getListById(id);
         DefaultTableModel modeloTabla = (DefaultTableModel)tblHabilidades.getModel();

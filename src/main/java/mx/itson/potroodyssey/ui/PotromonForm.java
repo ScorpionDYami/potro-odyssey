@@ -19,7 +19,22 @@ public class PotromonForm extends javax.swing.JDialog {
 
     int id;
     
-    /** Creates new form PotromonForm */
+    /**
+     * Constructor de la clase `PotromonForm`. Este constructor inicializa el
+     * formulario y carga los datos del `potromon` especificado por el `id` si
+     * es diferente de 0. Si el `id` es 0, el formulario se inicializa para
+     * crear un nuevo `potromon`. Los datos del `potromon` (nombre, descripción,
+     * y entrenador) se cargan desde la base de datos y se asignan a los campos
+     * correspondientes del formulario.
+     *
+     * @param parent La ventana principal o el formulario padre desde el cual se
+     * abre este formulario.
+     * @param modal Indica si el formulario debe ser modal o no. Si es `true`,
+     * el formulario bloqueará la interacción con el formulario principal hasta
+     * que se cierre.
+     * @param id El ID del `potromon` que se desea mostrar o editar. Si es `0`,
+     * el formulario será para crear un nuevo `potromon`.
+     */
     public PotromonForm(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
@@ -162,6 +177,20 @@ public class PotromonForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Este método se ejecuta cuando el usuario hace clic en el botón "Aceptar"
+     * del formulario. Su propósito es obtener los datos ingresados por el
+     * usuario, como el nombre, la descripción, el entrenador seleccionado y el
+     * puntaje. Luego, dependiendo de si el formulario está en modo de creación
+     * o edición, se guarda o actualiza la información del `Potromon` en la base
+     * de datos.
+     *
+     * Si el `id` es 0 (modo creación), se crea un nuevo `Potromon` con los
+     * datos ingresados. Si el `id` es distinto de 0 (modo edición), se
+     * actualizan los datos de un `Potromon` existente.
+     *
+     * @param evt El evento generado al hacer clic en el botón "Aceptar".
+     */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         String nombre = txtNombre.getText();
         String descripcion = txtaDescripcion.getText();
@@ -192,11 +221,24 @@ public class PotromonForm extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Ocurrió un error al intentar guardar el registro", "Error al guardar", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
-
+    
+    /**
+     * Este método se ejecuta al abrir la ventana del formulario. Su función es
+     * cargar los entrenadores disponibles en un `ComboBox`, para que el usuario
+     * pueda seleccionarlos al interactuar con el formulario.
+     *
+     * @param evt El evento generado cuando la ventana se abre.
+     */
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         cargarEntrenadoresEnComboBox();
     }//GEN-LAST:event_formWindowOpened
 
+    /**
+     * Este método carga la lista de entrenadores disponibles en un `ComboBox`
+     * para que el usuario pueda seleccionarlos. Además, si se está editando un
+     * `Potromon`, selecciona automáticamente el entrenador asignado a ese
+     * `Potromon` en el `ComboBox`.
+     */
     private void cargarEntrenadoresEnComboBox() {
         List<Entrenador> entrenadores = Entrenador.getAll();
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();

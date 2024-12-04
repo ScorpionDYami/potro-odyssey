@@ -127,7 +127,16 @@ public class EntrenadorListado extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    /**
+     * Método manejador de eventos para el botón "Agregar". Este método se
+     * ejecuta cuando el usuario hace clic en el botón "Agregar" en la interfaz.
+     * Abre un formulario vacío para crear un nuevo entrenador y, después de que
+     * el formulario se cierre, recarga los datos en la tabla de entrenadores.
+     *
+     * @param evt El evento generado por la acción de hacer clic en el botón
+     * "Agregar".
+     */
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         EntrenadorForm form = new EntrenadorForm(this, true, 0);
         form.setVisible(true);
@@ -135,6 +144,16 @@ public class EntrenadorListado extends javax.swing.JFrame {
         cargarTabla();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+    /**
+     * Método manejador de eventos para el botón "Editar". Este método se
+     * ejecuta cuando el usuario hace clic en el botón "Editar" en la interfaz.
+     * Abre un formulario para editar los datos del entrenador seleccionado en
+     * la tabla y, después de que el formulario se cierre, recarga los datos en
+     * la tabla de entrenadores.
+     *
+     * @param evt El evento generado por la acción de hacer clic en el botón
+     * "Editar".
+     */
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         int renglon = tblEntrenadores.getSelectedRow();
         int idEntrenador = Integer.parseInt(tblEntrenadores.getModel().getValueAt(renglon, 0).toString());
@@ -145,6 +164,16 @@ public class EntrenadorListado extends javax.swing.JFrame {
         cargarTabla();
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    /**
+     * Método manejador de eventos para el botón "Eliminar". Este método se
+     * ejecuta cuando el usuario hace clic en el botón "Eliminar" en la
+     * interfaz. Elimina el entrenador seleccionado en la tabla después de
+     * confirmar la acción con un cuadro de diálogo y, si la operación es
+     * exitosa, recarga los datos en la tabla de entrenadores.
+     *
+     * @param evt El evento generado por la acción de hacer clic en el botón
+     * "Eliminar".
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int renglon = tblEntrenadores.getSelectedRow();
         int idEntrenador = Integer.parseInt(tblEntrenadores.getModel().getValueAt(renglon, 0).toString());
@@ -159,11 +188,25 @@ public class EntrenadorListado extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    /**
+     * Método manejador de eventos que se ejecuta cuando la ventana del
+     * formulario se ha abierto. Este método carga los datos en la tabla de
+     * entrenadores y elimina la primera columna de la tabla.
+     *
+     * @param evt El evento generado cuando la ventana se abre (accionado por el
+     * sistema cuando la ventana es visible).
+     */
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         cargarTabla();
         tblEntrenadores.removeColumn(tblEntrenadores.getColumnModel().getColumn(0));
     }//GEN-LAST:event_formWindowOpened
-
+    
+    /**
+     * Método encargado de cargar los datos de los entrenadores en la tabla
+     * `tblEntrenadores`. Este método obtiene todos los entrenadores desde la
+     * base de datos, limpia la tabla y luego agrega cada entrenador a la tabla,
+     * mostrando su ID, nombre y apodo.
+     */
     private void cargarTabla(){
         List<Entrenador> entrenadores = Entrenador.getAll();
         DefaultTableModel modeloTabla = (DefaultTableModel)tblEntrenadores.getModel();

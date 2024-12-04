@@ -16,12 +16,27 @@ import mx.itson.potroodyssey.entidades.Potromon;
 public class PotromonIndex extends javax.swing.JFrame {
 
     /**
-     * Creates new form PotromonIndex
+     * Constructor de la clase `PotromonIndex`. Inicializa los componentes del
+     * formulario. Este constructor se llama cuando se crea una nueva instancia
+     * de la ventana `PotromonIndex`.
+     *
+     * @param parent La ventana principal que actúa como contenedor de este
+     * formulario.
+     * @param modal Indica si la ventana es modal (impide interacción con otras
+     * ventanas mientras está abierta).
      */
     public PotromonIndex(java.awt.Frame parent, boolean modal) {    
         initComponents();
     }
 
+    /**
+     * Este método carga los datos de todos los `Potromon` en una tabla
+     * (`tblPotromones`). Para cada `Potromon`, agrega una fila con su ID,
+     * nombre, descripción, nombre del entrenador y puntaje.
+     *
+     * El método limpia previamente las filas existentes en la tabla antes de
+     * cargar los nuevos datos.
+     */
     private void cargarTabla(){
         List<Potromon> potromones = Potromon.getAll();
         DefaultTableModel modeloTabla = (DefaultTableModel)tblPotromones.getModel();
@@ -169,6 +184,14 @@ public class PotromonIndex extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Este método se ejecuta cuando el usuario hace clic en el botón "Agregar"
+     * en la interfaz. Abre el formulario de creación de un nuevo `Potromon`
+     * (PotromonForm) y, después de que el usuario lo cierre, recarga la tabla
+     * de `Potromon` para reflejar los cambios.
+     *
+     * @param evt El evento generado por el clic en el botón "Agregar".
+     */
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         PotromonForm form = new PotromonForm(this, true, 0);
         form.setVisible(true);
@@ -176,6 +199,13 @@ public class PotromonIndex extends javax.swing.JFrame {
         cargarTabla();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+    /**
+     * Este método se ejecuta cuando el usuario hace clic en el botón "Eliminar"
+     * en la interfaz. Permite eliminar el registro del `Potromon` seleccionado
+     * en la tabla, tras confirmar la acción mediante un cuadro de diálogo.
+     *
+     * @param evt El evento generado por el clic en el botón "Eliminar".
+     */
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int renglon = tblPotromones.getSelectedRow();
         int idPotromon = Integer.parseInt(tblPotromones.getModel().getValueAt(renglon, 0).toString());
@@ -190,6 +220,13 @@ public class PotromonIndex extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    /**
+     * Este método se ejecuta cuando el usuario hace clic en el botón "Editar"
+     * en la interfaz. Permite editar los detalles de un `Potromon` seleccionado
+     * en la tabla, abriendo el formulario de edición correspondiente.
+     *
+     * @param evt El evento generado por el clic en el botón "Editar".
+     */
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         int renglon = tblPotromones.getSelectedRow();
         int idPotromon = Integer.parseInt(tblPotromones.getModel().getValueAt(renglon, 0).toString());
@@ -200,6 +237,14 @@ public class PotromonIndex extends javax.swing.JFrame {
         cargarTabla();
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    /**
+     * Este método se ejecuta cuando el usuario hace clic en el botón
+     * "Visualizar" en la interfaz. Permite visualizar los detalles de un
+     * `Potromon` seleccionado en la tabla, abriendo una tarjeta de
+     * visualización correspondiente.
+     *
+     * @param evt El evento generado por el clic en el botón "Visualizar".
+     */
     private void btnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarActionPerformed
         int renglon = tblPotromones.getSelectedRow();
         int idPotromon = Integer.parseInt(tblPotromones.getModel().getValueAt(renglon, 0).toString());
@@ -210,6 +255,14 @@ public class PotromonIndex extends javax.swing.JFrame {
         cargarTabla();
     }//GEN-LAST:event_btnVisualizarActionPerformed
 
+    /**
+     * Este método se ejecuta cuando el usuario hace clic en el botón
+     * "Habilidades" en la interfaz. Permite ver la lista de habilidades de un
+     * `Potromon` seleccionado en la tabla, abriendo una vista que muestra
+     * dichas habilidades.
+     *
+     * @param evt El evento generado por el clic en el botón "Habilidades".
+     */
     private void btnHabilidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHabilidadesActionPerformed
         int renglon = tblPotromones.getSelectedRow();
         int idPotromon = Integer.parseInt(tblPotromones.getModel().getValueAt(renglon, 0).toString());
@@ -218,6 +271,13 @@ public class PotromonIndex extends javax.swing.JFrame {
         form.setVisible(true);
     }//GEN-LAST:event_btnHabilidadesActionPerformed
 
+    /**
+     * Este método se ejecuta cuando la ventana de la interfaz se abre. Se
+     * utiliza para cargar los datos de la tabla de `Potromon` y eliminar la
+     * columna de ID de la vista de la tabla.
+     *
+     * @param evt El evento generado cuando la ventana se abre.
+     */
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         cargarTabla();
         tblPotromones.removeColumn(tblPotromones.getColumnModel().getColumn(0));

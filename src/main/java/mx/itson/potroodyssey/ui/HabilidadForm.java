@@ -17,7 +17,22 @@ public class HabilidadForm extends javax.swing.JDialog {
     int idPotromon;
     
     /**
-     * Creates new form HabilidadForm
+     * Constructor de la clase `HabilidadForm`. Este constructor inicializa el
+     * formulario de habilidades, configura los parámetros de la ventana (como
+     * el identificador de la habilidad y el identificador del 'potromon') y, si
+     * el ID de la habilidad es distinto de 0, carga los datos de la habilidad
+     * correspondiente desde la base de datos para permitir su edición.
+     *
+     * @param parent El cuadro de diálogo o ventana principal que contiene este
+     * formulario.
+     * @param modal Indica si el formulario debe ser modal, lo que significa que
+     * bloquea la interacción con otras ventanas hasta que se cierre.
+     * @param id El identificador de la habilidad. Si es 0, se supone que se
+     * está creando una nueva habilidad. Si es diferente de 0, se busca la
+     * habilidad existente con ese ID.
+     * @param idPotromon El identificador del 'potromon' relacionado con la
+     * habilidad. Este valor se utiliza para asociar la habilidad con un
+     * potromon específico.
      */
     public HabilidadForm(java.awt.Dialog parent, boolean modal, int id, int idPotromon) {
         super(parent, modal);
@@ -118,6 +133,17 @@ public class HabilidadForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Método manejador de eventos para el botón "Aceptar". Este método se
+     * ejecuta cuando el usuario hace clic en el botón "Aceptar" en el
+     * formulario. Dependiendo de si el formulario está creando una nueva
+     * habilidad o editando una existente, guarda o actualiza los datos de la
+     * habilidad. Después de guardar o actualizar, muestra un mensaje de éxito o
+     * error y cierra el formulario.
+     *
+     * @param evt El evento generado por la acción de hacer clic en el botón
+     * "Aceptar".
+     */
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         String nombre = txtNombre.getText();
         String descripcion = txtaDescripcion.getText();
