@@ -123,6 +123,8 @@ public class Potromon {
     public void setPuntaje(int puntaje) {
         this.puntaje = puntaje;
     }
+    
+    //Creamos una lista para poder colocar todos los Potromon y los conectamos junto a la base de datos para invocarlos dentro de esta//
     public static List<Potromon> getAll(){
         List<Potromon> potromones = new ArrayList<>();
         try {
@@ -159,6 +161,7 @@ public class Potromon {
         return potromones;
     }
     
+    //Tomamos los Potromones desde el ID (identificador) y obtenemos sus parametros en el orden impuesto//
     public static Potromon getById(int id){
         Potromon p = new Potromon();
         try {
@@ -190,7 +193,7 @@ public class Potromon {
         }
         return p;
     }
-    
+    //Guardamos dentro de el array nuestros parametros puestos en esta funcion//
     public static boolean save(String nombre, String descripcion, int entrenador, int puntaje){
         boolean resultado = false;
         try{
@@ -211,6 +214,7 @@ public class Potromon {
         return resultado;
     }
     
+    //Editamos en el array el parametro anteriormente puesto con esta funcion//
     public static boolean edit(int id, String nombre, String descripcion, int entrenador, int puntaje){
         boolean resultado = false;
         try{
@@ -231,7 +235,7 @@ public class Potromon {
         }
         return resultado;
     }
-    
+    //Eliminamos los parametros mencionados dentro del array list//
     public static boolean delete(int id) {
         boolean resultado = false;
         try {

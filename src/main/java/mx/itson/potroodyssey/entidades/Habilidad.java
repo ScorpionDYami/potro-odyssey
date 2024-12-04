@@ -51,6 +51,8 @@ public class Habilidad {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    
+    //Creamos una lista para poder colocar todas las habilidades y las conectamos junto a la base de datos para invocarlas dentro de esta//
     public static List<Habilidad> getListById(int idPotromon){
         List<Habilidad> habilidades = new ArrayList<>();
         try{
@@ -72,6 +74,7 @@ public class Habilidad {
         return habilidades;
     }
     
+    //Tomamos las habilidades desde el ID (identificador) y obtenemos sus parametros en el orden impuesto//
     public static Habilidad getById(int id){
         Habilidad h = new Habilidad();
         try {
@@ -92,6 +95,7 @@ public class Habilidad {
         return h;
     }
     
+    //Guardamos dentro de el array nuestros parametros puestos en esta funcion//
     public static boolean save(String nombre, String descripcion, int idPotromon){
         boolean resultado = false;
         try{
@@ -110,7 +114,7 @@ public class Habilidad {
         }
         return resultado;
     }
-    
+    //Editamos en el array el parametro anteriormente puesto con esta funcion//
     public static boolean edit(int id, String nombre, String descripcion){
         boolean resultado = false;
         try{
@@ -129,7 +133,7 @@ public class Habilidad {
         }
         return resultado;
     }
-    
+    //Eliminamos los parametros mencionados dentro del array list//
     public static boolean delete(int id) {
         boolean resultado = false;
         try {
