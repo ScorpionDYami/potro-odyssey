@@ -96,7 +96,7 @@ public class PotromonForm extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Entrenador:");
 
-        cmbEntrenadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbEntrenadores.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--None--" }));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("Puntaje:");
@@ -142,7 +142,7 @@ public class PotromonForm extends javax.swing.JDialog {
                                 .addGap(6, 6, 6)
                                 .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(56, 56, 56)))))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -197,7 +197,16 @@ public class PotromonForm extends javax.swing.JDialog {
         String nombreEntrenador =  cmbEntrenadores.getSelectedItem().toString();
         List<Entrenador> entrenadores = Entrenador.getAll();
         int idEntrenador = 0;
-        int puntaje = Integer.parseInt(txtPuntaje.getText()) + Potromon.getById(id).getPuntaje();
+        
+        int puntaje = Potromon.getById(id).getPuntaje();
+
+        if (txtPuntaje != null && !txtPuntaje.getText().isEmpty()) {
+            try {
+                puntaje += Integer.parseInt(txtPuntaje.getText());
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada no válida en el campo de texto.");
+            }
+        }
         
        
         for(int i=0;i<entrenadores.size();i++){
