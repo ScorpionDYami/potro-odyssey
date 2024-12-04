@@ -4,18 +4,32 @@
  */
 package mx.itson.potroodyssey.ui;
 
+import mx.itson.potroodyssey.entidades.Potromon;
+
 /**
  *
  * @author yato_
  */
 public class PotroCard extends javax.swing.JDialog {
 
+    int id;
+    
     /**
      * Creates new form PotroCard
      */
-    public PotroCard(java.awt.Frame parent, boolean modal) {
+    public PotroCard(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
+        
+        this.id = id;
+        if(id != 0){
+            Potromon p = Potromon.getById(id);
+            labelNombre.setText(p.getNombre());
+            labelPuntaje.setText(String.valueOf(p.getPuntaje()));
+            txtaDescripcion.setText(p.getDescripcion());
+            labelEntrenador.setText(p.getEntrenador().getNombre());
+           // txtaHabilidad.setText(cmbHabilidades.getItemAt(id));
+        }
     }
 
     /**
@@ -152,7 +166,7 @@ public class PotroCard extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                PotroCard dialog = new PotroCard(new javax.swing.JFrame(), true);
+                PotroCard dialog = new PotroCard(new javax.swing.JFrame(), true, 0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

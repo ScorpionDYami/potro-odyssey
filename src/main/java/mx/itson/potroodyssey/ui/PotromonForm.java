@@ -5,16 +5,33 @@
 
 package mx.itson.potroodyssey.ui;
 
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import mx.itson.potroodyssey.entidades.Entrenador;
+import mx.itson.potroodyssey.entidades.Potromon;
+
 /**
  *
  * @author Kevin
  */
 public class PotromonForm extends javax.swing.JDialog {
 
+    int id;
+    
     /** Creates new form PotromonForm */
-    public PotromonForm(java.awt.Frame parent, boolean modal) {
+    public PotromonForm(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
+        
+        this.id = id;
+        if(id != 0){
+            Potromon p = Potromon.getById(id);
+            txtNombre.setText(p.getNombre());
+            txtaDescripcion.setText(p.getDescripcion());
+            //cmbEntrenadores.setSelectedItem(p.getEntrenador());
+            
+        }
     }
 
     /** This method is called from within the constructor to
@@ -40,6 +57,11 @@ public class PotromonForm extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel1.setText("Potromon");
@@ -66,6 +88,11 @@ public class PotromonForm extends javax.swing.JDialog {
 
         btnAceptar.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,12 +122,12 @@ public class PotromonForm extends javax.swing.JDialog {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel4)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(cmbEntrenadores, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(19, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75))
+                                    .addComponent(cmbEntrenadores, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(56, 56, 56)))))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,10 +142,10 @@ public class PotromonForm extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -127,7 +154,7 @@ public class PotromonForm extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtPuntaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addComponent(btnAceptar)
                 .addGap(14, 14, 14))
         );
@@ -135,6 +162,69 @@ public class PotromonForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        String nombre = txtNombre.getText();
+        String descripcion = txtaDescripcion.getText();
+        String nombreEntrenador =  cmbEntrenadores.getSelectedItem().toString();
+        List<Entrenador> entrenadores = Entrenador.getAll();
+        int idEntrenador = 0;
+        int puntaje = Integer.parseInt(txtPuntaje.getText());
+        Potromon p = new Potromon();
+       
+        for(int i=0;i<entrenadores.size();i++){
+            if(nombreEntrenador.equals(entrenadores.get(i).getNombre())){
+                idEntrenador = entrenadores.get(i).getId();
+                break;
+            }
+        }
+        
+        if(this.id != 0){
+            puntaje += p.getPuntaje();
+        } 
+        
+        
+        
+        boolean resultado = this.id == 0 ?
+                Potromon.save(nombre, descripcion, idEntrenador, puntaje) :
+                Potromon.edit(id, nombre, descripcion, idEntrenador, puntaje);
+        if(resultado){
+            JOptionPane.showMessageDialog(this, "El registro se guardó correctamente", "Entrenador guardado", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "Ocurrió un error al intentar guardar el registro", "Error al guardar", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        cargarEntrenadoresEnComboBox();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void cargarEntrenadoresEnComboBox() {
+        List<Entrenador> entrenadores = Entrenador.getAll();
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+
+        for (Entrenador entrenador : entrenadores) {
+            model.addElement(entrenador.getNombre());  
+        }
+
+        cmbEntrenadores.setModel(model);
+        
+        Potromon p = Potromon.getById(id);
+
+        if (p != null && p.getEntrenador() != null) {
+            String entrenadorNombre = p.getEntrenador().getNombre();
+
+            for (int i = 0; i < model.getSize(); i++) {
+                if (model.getElementAt(i).equals(entrenadorNombre)) {
+                    cmbEntrenadores.setSelectedIndex(i);
+                    break;
+                }
+            }
+        } else {
+            cmbEntrenadores.setSelectedIndex(0);
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -161,11 +251,14 @@ public class PotromonForm extends javax.swing.JDialog {
             java.util.logging.Logger.getLogger(PotromonForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                PotromonForm dialog = new PotromonForm(new javax.swing.JFrame(), true);
+                PotromonForm dialog = new PotromonForm(new javax.swing.JFrame(), true, 0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

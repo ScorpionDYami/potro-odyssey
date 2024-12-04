@@ -4,18 +4,32 @@
  */
 package mx.itson.potroodyssey.ui;
 
+import javax.swing.JOptionPane;
+import mx.itson.potroodyssey.entidades.Habilidad;
+
 /**
  *
  * @author yato_
  */
 public class HabilidadForm extends javax.swing.JDialog {
 
+    int id;
+    int idPotromon;
+    
     /**
      * Creates new form HabilidadForm
      */
-    public HabilidadForm(java.awt.Frame parent, boolean modal) {
+    public HabilidadForm(java.awt.Dialog parent, boolean modal, int id, int idPotromon) {
         super(parent, modal);
         initComponents();
+        
+        this.idPotromon = idPotromon;
+        this.id = id;
+        if(id != 0){
+            Habilidad h = Habilidad.getById(id);
+            txtNombre.setText(h.getNombre());
+            txtaDescripcion.setText(h.getDescripcion());
+        }
     }
 
     /**
@@ -53,6 +67,11 @@ public class HabilidadForm extends javax.swing.JDialog {
 
         btnAceptar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,6 +118,22 @@ public class HabilidadForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        String nombre = txtNombre.getText();
+        String descripcion = txtaDescripcion.getText();
+        
+        
+        boolean resultado = this.id == 0 ?
+                Habilidad.save(nombre, descripcion, idPotromon) :
+                Habilidad.edit(id, nombre, descripcion);
+        if(resultado){
+            JOptionPane.showMessageDialog(this, "El registro se guardó correctamente", "Entrenador guardado", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "Ocurrió un error al intentar guardar el registro", "Error al guardar", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -129,7 +164,7 @@ public class HabilidadForm extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                HabilidadForm dialog = new HabilidadForm(new javax.swing.JFrame(), true);
+                HabilidadForm dialog = new HabilidadForm(new javax.swing.JDialog(), true, 0, 0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

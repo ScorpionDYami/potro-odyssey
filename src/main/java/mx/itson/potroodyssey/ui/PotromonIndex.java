@@ -4,20 +4,39 @@
  */
 package mx.itson.potroodyssey.ui;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import mx.itson.potroodyssey.entidades.Potromon;
+
 /**
  *
  * @author Kevin
  */
-public class PotromonIndex extends javax.swing.JDialog {
+public class PotromonIndex extends javax.swing.JFrame {
 
     /**
      * Creates new form PotromonIndex
      */
-    public PotromonIndex(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public PotromonIndex(java.awt.Frame parent, boolean modal) {    
         initComponents();
     }
 
+    private void cargarTabla(){
+        List<Potromon> potromones = Potromon.getAll();
+        DefaultTableModel modeloTabla = (DefaultTableModel)tblPotromones.getModel();
+        modeloTabla.setRowCount(0);
+        for(Potromon p : potromones) {
+            modeloTabla.addRow(new Object[] { 
+                p.getId(),
+                p.getNombre(),
+                p.getDescripcion(),
+                p.getEntrenador().getNombre(),
+                p.getPuntaje()
+            });
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,18 +79,43 @@ public class PotromonIndex extends javax.swing.JDialog {
 
         btnAgregar.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnVisualizar.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         btnVisualizar.setText("Visualizar");
+        btnVisualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVisualizarActionPerformed(evt);
+            }
+        });
 
         btnHabilidades.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         btnHabilidades.setText("Habilidades");
+        btnHabilidades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHabilidadesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -119,6 +163,55 @@ public class PotromonIndex extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        PotromonForm form = new PotromonForm(this, true, 0);
+        form.setVisible(true);
+        
+        cargarTabla();
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        int renglon = tblPotromones.getSelectedRow();
+        int idPotromon = Integer.parseInt(tblPotromones.getModel().getValueAt(renglon, 0).toString());
+
+        if (JOptionPane.showConfirmDialog(this, "¿Estas seguro que desea eliminar el registro del Potromon?", "Eliminar registro", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (Potromon.delete(idPotromon)) {
+                JOptionPane.showMessageDialog(this, "El registro se elimino con exito", "Registro eliminado", JOptionPane.INFORMATION_MESSAGE);
+                cargarTabla();
+            } else {
+                JOptionPane.showMessageDialog(this, "Ocurrio un error al eliminar el registro", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        int renglon = tblPotromones.getSelectedRow();
+        int idPotromon = Integer.parseInt(tblPotromones.getModel().getValueAt(renglon, 0).toString());
+        
+        PotromonForm form = new PotromonForm(this, true, idPotromon);
+        form.setVisible(true);
+        
+        cargarTabla();
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarActionPerformed
+        int renglon = tblPotromones.getSelectedRow();
+        int idPotromon = Integer.parseInt(tblPotromones.getModel().getValueAt(renglon, 0).toString());
+        
+        PotroCard form = new PotroCard(this, true, idPotromon);
+        form.setVisible(true);
+        
+        cargarTabla();
+    }//GEN-LAST:event_btnVisualizarActionPerformed
+
+    private void btnHabilidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHabilidadesActionPerformed
+        int renglon = tblPotromones.getSelectedRow();
+        int idPotromon = Integer.parseInt(tblPotromones.getModel().getValueAt(renglon, 0).toString());
+        
+        HabilidadListado form = new HabilidadListado(this, true, idPotromon);
+        form.setVisible(true);
+    }//GEN-LAST:event_btnHabilidadesActionPerformed
 
     /**
      * @param args the command line arguments
