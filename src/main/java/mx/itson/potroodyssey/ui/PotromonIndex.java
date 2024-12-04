@@ -35,11 +35,12 @@ public class PotromonIndex extends javax.swing.JDialog {
         btnEliminar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnVisualizar = new javax.swing.JButton();
-        btnHabilidad = new javax.swing.JButton();
+        btnHabilidades = new javax.swing.JButton();
 
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         jLabel1.setText("Potromones");
@@ -57,20 +58,20 @@ public class PotromonIndex extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(tblPotromones);
 
-        btnAgregar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAgregar.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         btnAgregar.setText("Agregar");
 
-        btnEliminar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnEliminar.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         btnEliminar.setText("Eliminar");
 
-        btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnEditar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnEditar.setText("Editar");
 
-        btnVisualizar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnVisualizar.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
         btnVisualizar.setText("Visualizar");
 
-        btnHabilidad.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnHabilidad.setText("Habilidades");
+        btnHabilidades.setFont(new java.awt.Font("Arial Narrow", 1, 18)); // NOI18N
+        btnHabilidades.setText("Habilidades");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,19 +80,20 @@ public class PotromonIndex extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 539, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80)
-                        .addComponent(btnAgregar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEditar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnVisualizar))
-                    .addComponent(btnHabilidad))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(btnHabilidades)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(80, 80, 80)
+                            .addComponent(btnAgregar)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnEliminar)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnEditar)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnVisualizar))
+                        .addComponent(jScrollPane1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,7 +102,7 @@ public class PotromonIndex extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(jLabel1)
-                        .addGap(29, 29, 29))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -109,10 +111,10 @@ public class PotromonIndex extends javax.swing.JDialog {
                             .addComponent(btnEditar)
                             .addComponent(btnVisualizar))
                         .addGap(18, 18, 18)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnHabilidad)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnHabilidades)
+                .addGap(12, 12, 12))
         );
 
         pack();
@@ -164,7 +166,7 @@ public class PotromonIndex extends javax.swing.JDialog {
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnHabilidad;
+    private javax.swing.JButton btnHabilidades;
     private javax.swing.JButton btnVisualizar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMenuItem1;
