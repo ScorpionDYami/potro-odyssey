@@ -4,6 +4,11 @@
  */
 package mx.itson.potroodyssey.ui;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import mx.itson.potroodyssey.entidades.Entrenador;
+
 /**
  *
  * @author Kevin
@@ -35,6 +40,11 @@ public class EntrenadorListado extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
         jLabel1.setText("Entrenadores");
@@ -119,17 +129,54 @@ public class EntrenadorListado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
+        EntrenadorForm form = new EntrenadorForm(this, true, 0);
+        form.setVisible(true);
+        
+        cargarTabla();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+        int renglon = tblEntrenadores.getSelectedRow();
+        int idEntrenador = Integer.parseInt(tblEntrenadores.getModel().getValueAt(renglon, 0).toString());
+        
+        EntrenadorForm form = new EntrenadorForm(this, true, idEntrenador);
+        form.setVisible(true);
+        
+        cargarTabla();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+        int renglon = tblEntrenadores.getSelectedRow();
+        int idEntrenador = Integer.parseInt(tblEntrenadores.getModel().getValueAt(renglon, 0).toString());
+
+        if (JOptionPane.showConfirmDialog(this, "¿Estas seguro que desea eliminar este Entrenador?", "Eliminar Entrendaor", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (Entrenador.delete(idEntrenador)) {
+                JOptionPane.showMessageDialog(this, "El Entrenador se eliminó con éxito", "Entrenador eliminado", JOptionPane.INFORMATION_MESSAGE);
+                cargarTabla();
+            } else {
+                JOptionPane.showMessageDialog(this, "Ocurrió un error al querer eliminar al Entrenador", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        cargarTabla();
+        tblEntrenadores.removeColumn(tblEntrenadores.getColumnModel().getColumn(0));
+    }//GEN-LAST:event_formWindowOpened
+
+    private void cargarTabla(){
+        List<Entrenador> entrenadores = Entrenador.getAll();
+        DefaultTableModel modeloTabla = (DefaultTableModel)tblEntrenadores.getModel();
+        modeloTabla.setRowCount(0);
+        for(Entrenador e : entrenadores) {
+            modeloTabla.addRow(new Object[] { 
+                e.getId(),
+                e.getNombre(),
+                e.getApodo()
+            });
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */

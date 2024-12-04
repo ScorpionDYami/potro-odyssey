@@ -4,18 +4,30 @@
  */
 package mx.itson.potroodyssey.ui;
 
+import javax.swing.JOptionPane;
+import mx.itson.potroodyssey.entidades.Entrenador;
+
 /**
  *
  * @author Kevin
  */
 public class EntrenadorForm extends javax.swing.JDialog {
 
+    int id;
+    
     /**
      * Creates new form EntrenadorForm
      */
-    public EntrenadorForm(java.awt.Frame parent, boolean modal) {
+    public EntrenadorForm(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
         initComponents();
+        
+        this.id = id;
+        if(id != 0){
+            Entrenador e = Entrenador.getById(id);
+            txtNombre.setText(e.getNombre());
+            txtApodo.setText(e.getApodo());
+        }
     }
 
     /**
@@ -48,6 +60,11 @@ public class EntrenadorForm extends javax.swing.JDialog {
 
         btnAceptar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,6 +110,21 @@ public class EntrenadorForm extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        String nombre = txtNombre.getText();
+        String puesto = txtApodo.getText();
+        
+        boolean resultado = this.id == 0 ?
+                Entrenador.save(nombre, puesto) :
+                Entrenador.edit(id, nombre, puesto);
+        if(resultado){
+            JOptionPane.showMessageDialog(this, "El Entrenador se guardó correctamente", "Entrenador guardado", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "Ocurrió un error al intentar guardar al Entrenador", "Error al guardar", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -123,7 +155,7 @@ public class EntrenadorForm extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                EntrenadorForm dialog = new EntrenadorForm(new javax.swing.JFrame(), true);
+                EntrenadorForm dialog = new EntrenadorForm(new javax.swing.JFrame(), true, 0);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
