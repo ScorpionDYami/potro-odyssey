@@ -23,48 +23,61 @@ public class Entrenador {
     private String apodo;
 
     /**
-     * @return the id
+     * Obtiene el ID del entrenador.
+     * @return El ID del entrenador.
      */
     public int getId() {
         return id;
     }
 
     /**
-     * @param id the id to set
+     * Establece el valor del ID del entrenador.
+     * @param id El ID que se desea asignar al entrenador.
      */
     public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * @return the nombre
+     * Obtiene el nombre del entrenador.
+     * @return El nombre del entrenador.
      */
     public String getNombre() {
         return nombre;
     }
 
     /**
-     * @param nombre the nombre to set
+     * Establece el valor del nombre del entrenador.
+     * @param nombre El nombre que se desea asignar al entrenador.
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
     /**
-     * @return the apodo
+     * Obtiene el apodo del entrenador.
+     * @return El apodo del entrenador.
      */
     public String getApodo() {
         return apodo;
     }
 
     /**
-     * @param apodo the apodo to set
+     * Establece el valor del apodo del entrenador.
+     * @param apodo El apodo que se desea asignar al entrenador.
      */
     public void setApodo(String apodo) {
         this.apodo = apodo;
     }
     
-    //Creamos una lista para poder colocar todos los entrenadores y los conectamos junto a la base de datos para invocarlas dentro de esta//
+    
+    /**
+     * Obtiene una lista de todos los entrenadores registrados en la base de
+     * datos.
+     * @return Una lista de objetos `Entrenador` que contiene todos los
+     * entrenadores obtenidos de la base de datos. Si ocurre un error durante el
+     * proceso, se devuelve una lista vacía.
+     */
     public static List<Entrenador> getAll(){
         List<Entrenador> entrenadores = new ArrayList<>();
         try {
@@ -84,7 +97,13 @@ public class Entrenador {
         return entrenadores;
     }
     
-    //Invocamos el entrenador desde el ID (identificador) y obtenemos sus parametros en el orden impuesto//
+    /**
+     * Obtiene un entrenador de la base de datos según el ID proporcionado.
+     * @param id El ID del entrenador que se desea obtener.
+     * @return Un objeto `Entrenador` con los datos del entrenador
+     * correspondiente al ID proporcionado. Si no se encuentra un entrenador con
+     * ese ID o ocurre un error, se devuelve un objeto `Entrenador` vacío.
+     */
     public static Entrenador getById(int id){
         Entrenador e = new Entrenador();
         try {
@@ -105,7 +124,13 @@ public class Entrenador {
         return e;
     }
     
-     //Guardamos dentro de el array nuestros parametros de Entrenador puestos en esta funcion//
+    /**
+     * Guarda un nuevo entrenador en la base de datos.
+     * @param nombre El nombre del entrenador a guardar.
+     * @param apodo El apodo del entrenador a guardar.
+     * @return `true` si el entrenador se guardó exitosamente; de lo contrario,
+     * `false`.
+     */
     public static boolean save(String nombre, String apodo){
         boolean resultado = false;
         try{
@@ -123,7 +148,15 @@ public class Entrenador {
         }
         return resultado;
     }
-    //Editamos en el array el parametro anteriormente puesto con esta funcion//
+    
+    /**
+     * Actualiza los datos de un entrenador en la base de datos.
+     * @param id El ID del entrenador que se desea actualizar.
+     * @param nombre El nuevo nombre del entrenador.
+     * @param apodo El nuevo apodo del entrenador.
+     * @return `true` si los datos del entrenador se actualizaron exitosamente;
+     * de lo contrario, `false`.
+     */
     public static boolean edit(int id, String nombre, String apodo){
         boolean resultado = false;
         try{
@@ -142,7 +175,13 @@ public class Entrenador {
         }
         return resultado;
     }
-    //Eliminamos los parametros mencionados dentro del array list//
+    
+    /**
+     * Elimina un entrenador de la base de datos según el ID proporcionado.
+     * @param id El ID del entrenador que se desea eliminar.
+     * @return `true` si el entrenador se eliminó exitosamente; de lo contrario,
+     * `false`.
+     */
     public static boolean delete(int id) {
         boolean resultado = false;
         try {

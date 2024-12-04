@@ -22,37 +22,60 @@ public class Habilidad {
     private String descripcion;
     
     /**
-     * @return the descripcion
+     * Obtiene la descripción de la habilidad.
+     * @return La descripción de la habilidad.
      */
     public String getDescripcion() {
         return descripcion;
     }
 
     /**
-     * @param descripcion the descripcion to set
+     * Establece la descripción de la habilidad.
+     * @param descripcion La descripción que se desea asignar a la habilidad.
      */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    // Getters y Setters
+    /**
+     * Obtiene el ID de la habilidad.
+     * @return El ID de la habilidad.
+     */
     public int getId() {
         return id;
     }
-
+    
+    /**
+     * Establece el ID de la habilidad.
+     * @param id El ID que se desea asignar a la habilidad.
+     */
     public void setId(int id) {
         this.id = id;
     }
-
+    
+    /**
+     * Obtiene el nombre de la habilidad.
+     * @return El nombre de la habilidad.
+     */
     public String getNombre() {
         return nombre;
     }
-
+    
+    /**
+     * Establece el nombre de la habilidad.
+     * @param nombre El nombre que se desea asignar a la habilidad.
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
     
-    //Creamos una lista para poder colocar todas las habilidades y las conectamos junto a la base de datos para invocarlas dentro de esta//
+    /**
+     * Obtiene una lista de habilidades asociadas a un Potromon, identificado
+     * por su ID.
+     * @param idPotromon El ID del Potromon para obtener sus habilidades.
+     * @return Una lista de habilidades asociadas al Potromon con el ID
+     * especificado.
+     */
     public static List<Habilidad> getListById(int idPotromon){
         List<Habilidad> habilidades = new ArrayList<>();
         try{
@@ -74,7 +97,11 @@ public class Habilidad {
         return habilidades;
     }
     
-    //Tomamos las habilidades desde el ID (identificador) y obtenemos sus parametros en el orden impuesto//
+    /**
+     * Obtiene una habilidad por su ID.
+     * @param id El ID de la habilidad a obtener.
+     * @return La habilidad con el ID especificado.
+     */
     public static Habilidad getById(int id){
         Habilidad h = new Habilidad();
         try {
@@ -95,7 +122,14 @@ public class Habilidad {
         return h;
     }
     
-    //Guardamos dentro de el array nuestros parametros puestos en esta funcion//
+    /**
+     * Guarda una nueva habilidad en la base de datos.
+     * @param nombre El nombre de la habilidad.
+     * @param descripcion La descripción de la habilidad.
+     * @param idPotromon El ID del Potromon al que se le asociará la habilidad.
+     * @return `true` si la habilidad se guardó exitosamente; de lo contrario,
+     * `false`.
+     */
     public static boolean save(String nombre, String descripcion, int idPotromon){
         boolean resultado = false;
         try{
@@ -114,7 +148,15 @@ public class Habilidad {
         }
         return resultado;
     }
-    //Editamos en el array el parametro anteriormente puesto con esta funcion//
+    
+    /**
+     * Edita una habilidad existente en la base de datos.
+     * @param id El ID de la habilidad a editar.
+     * @param nombre El nuevo nombre de la habilidad.
+     * @param descripcion La nueva descripción de la habilidad.
+     * @return `true` si la habilidad se editó exitosamente; de lo contrario,
+     * `false`.
+     */
     public static boolean edit(int id, String nombre, String descripcion){
         boolean resultado = false;
         try{
@@ -133,7 +175,13 @@ public class Habilidad {
         }
         return resultado;
     }
-    //Eliminamos los parametros mencionados dentro del array list//
+    
+    /**
+     * Elimina una habilidad de la base de datos por su ID.
+     * @param id El ID de la habilidad a eliminar.
+     * @return `true` si la habilidad se eliminó exitosamente; de lo contrario,
+     * `false`.
+     */
     public static boolean delete(int id) {
         boolean resultado = false;
         try {

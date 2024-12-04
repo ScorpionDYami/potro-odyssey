@@ -27,104 +27,122 @@ public class Potromon {
     private int puntaje;
 
     /**
-     * @return the id
+     * Obtiene el ID del Potromon.
+     * @return El ID del Potromon.
      */
     public int getId() {
         return id;
     }
 
     /**
-     * @param id the id to set
+     * Establece el ID del Potromon.
+     * @param id El ID que se desea asignar al Potromon.
      */
     public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * @return the nombre
+     * Obtiene el nombre del Potromon.
+     * @return El nombre del Potromon.
      */
     public String getNombre() {
         return nombre;
     }
 
     /**
-     * @param nombre the nombre to set
+     * Establece el nombre del Potromon.
+     * @param nombre El nombre que se desea asignar al Potromon.
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
     /**
-     * @return the descripcion
+     * Obtiene la descripción del Potromon.
+     * @return La descripción del Potromon.
      */
     public String getDescripcion() {
         return descripcion;
     }
 
     /**
-     * @param descripcion the descripcion to set
+     * Establece la descripción del Potromon.
+     * @param descripcion La descripción que se desea asignar al Potromon.
      */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
     /**
-     * @return the imagen
+     * Obtiene la imagen asociada al Potromon.
+     * @return La ruta de la ubicacion del archivo de la imagen del Potromon.
      */
     public String getImagen() {
         return imagen;
     }
 
     /**
-     * @param imagen the imagen to set
+     * Establece la imagen asociada al Potromon.
+     * @param imagen La ruta de ubicacion del archivo de la imagen del Potromon.
      */
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 
     /**
-     * @return the entrenador
+     * Obtiene el entrenador asociado al Potromon.
+     * @return El entrenador del Potromon.
      */
     public Entrenador getEntrenador() {
         return entrenador;
     }
 
     /**
-     * @param entrenador the entrenador to set
+     * Establece el entrenador asociado al Potromon.
+     * @param entrenador El entrenador que se desea asignar al Potromon.
      */
     public void setEntrenador(Entrenador entrenador) {
         this.entrenador = entrenador;
     }
 
     /**
-     * @return the habilidades
+     * Obtiene la lista de habilidades asociadas al Potromon.
+     * @return La lista de habilidades del Potromon.
      */
     public List<Habilidad> getHabilidades() {
         return habilidades;
     }
 
     /**
-     * @param habilidades the habilidades to set
+     * Establece la lista de habilidades asociadas al Potromon.
+     * @param habilidades La lista de habilidades que se desea asignar al
+     * Potromon.
      */
     public void setHabilidades(List<Habilidad> habilidades) {
         this.habilidades = habilidades;
     }
 
     /**
-     * @return the puntaje
+     * Obtiene el puntaje del Potromon.
+     * @return El puntaje del Potromon.
      */
     public int getPuntaje() {
         return puntaje;
     }
 
     /**
-     * @param puntaje the puntaje to set
+     * Establece el puntaje del Potromon.
+     * @param puntaje El puntaje que se desea asignar al Potromon.
      */
     public void setPuntaje(int puntaje) {
         this.puntaje = puntaje;
     }
     
-    //Creamos una lista para poder colocar todos los Potromon y los conectamos junto a la base de datos para invocarlos dentro de esta//
+    /**
+     * Obtiene todos los Potromones registrados en la base de datos.
+     * @return Una lista con todos los Potromones.
+     */
     public static List<Potromon> getAll(){
         List<Potromon> potromones = new ArrayList<>();
         try {
@@ -161,7 +179,11 @@ public class Potromon {
         return potromones;
     }
     
-    //Tomamos los Potromones desde el ID (identificador) y obtenemos sus parametros en el orden impuesto//
+    /**
+     * Obtiene un Potromon por su ID desde la base de datos.
+     * @param id El ID del Potromon a obtener.
+     * @return El Potromon con el ID especificado.
+     */
     public static Potromon getById(int id){
         Potromon p = new Potromon();
         try {
@@ -193,7 +215,16 @@ public class Potromon {
         }
         return p;
     }
-    //Guardamos dentro de el array nuestros parametros puestos en esta funcion//
+    
+    /**
+     * Guarda un nuevo Potromon en la base de datos.
+     * @param nombre El nombre del Potromon.
+     * @param descripcion La descripción del Potromon.
+     * @param entrenador El ID del entrenador asociado al Potromon.
+     * @param puntaje El puntaje del Potromon.
+     * @return `true` si el Potromon se guardó exitosamente; de lo contrario,
+     * `false`.
+     */
     public static boolean save(String nombre, String descripcion, int entrenador, int puntaje){
         boolean resultado = false;
         try{
@@ -214,7 +245,16 @@ public class Potromon {
         return resultado;
     }
     
-    //Editamos en el array el parametro anteriormente puesto con esta funcion//
+    /**
+     * Edita un Potromon existente en la base de datos.
+     * @param id El ID del Potromon a editar.
+     * @param nombre El nuevo nombre del Potromon.
+     * @param descripcion La nueva descripción del Potromon.
+     * @param entrenador El nuevo ID del entrenador asociado al Potromon.
+     * @param puntaje El nuevo puntaje del Potromon.
+     * @return `true` si el Potromon fue editado exitosamente; de lo contrario,
+     * `false`.
+     */
     public static boolean edit(int id, String nombre, String descripcion, int entrenador, int puntaje){
         boolean resultado = false;
         try{
@@ -235,7 +275,13 @@ public class Potromon {
         }
         return resultado;
     }
-    //Eliminamos los parametros mencionados dentro del array list//
+    
+    /**
+     * Elimina un Potromon por su ID desde la base de datos.
+     * @param id El ID del Potromon a eliminar.
+     * @return `true` si el Potromon fue eliminado exitosamente; de lo
+     * contrario, `false`.
+     */
     public static boolean delete(int id) {
         boolean resultado = false;
         try {
